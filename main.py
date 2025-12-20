@@ -7,6 +7,9 @@ clock = time.Clock()
 
 rect = Rect(0, 0, 50, 50)
 
+little_leaf = image.load('assets_level/little_leaf.png')
+little_leaf = transform.scale(little_leaf, (50, 50))
+
 while True:
     window.fill((0,0,0))
     keys = key.get_pressed()
@@ -16,6 +19,9 @@ while True:
 
     draw.rect(window, (255, 0, 0), rect)
 
+    window.blit(little_leaf, (100, 200))
+
+    
     if keys[K_w]:
         rect.y -= 5
     if keys[K_s]:
