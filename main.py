@@ -1,14 +1,23 @@
 from pygame import *
 
+# pip install pygame-ce
+
 init()
 window_size = 500, 400
 window = display.set_mode(window_size)
 clock = time.Clock()
 
-rect = Rect(0, 0, 50, 50)
+class Ball:
+    def __init__(self, x, y, radius, color=None):
+        self.x = x
+        self.y = y
+        self.radius = radius
+        self.color = color
 
-little_leaf = image.load('assets_level/little_leaf.png')
-little_leaf = transform.scale(little_leaf, (50, 50))
+    def reset(self):
+        draw.circle(window, self.color, (self.x, self.y), self.radius)
+
+b1 = Ball(0, 0, 25, (255, 0, 0)) #(0, 0, 25, (255, 0, 0))
 
 while True:
     window.fill((0,0,0))
@@ -17,19 +26,16 @@ while True:
         if e.type == QUIT:
             quit()
 
-    draw.rect(window, (255, 0, 0), rect)
+    b1.reset()
 
-    window.blit(little_leaf, (100, 200))
-
-    
     if keys[K_w]:
-        rect.y -= 5
+        b1.y -= 5
     if keys[K_s]:
-        rect.y += 5
+        b1.y += 5
     if keys[K_d]:
-        rect.x += 5
+        b1.x += 5
     if keys[K_a]:
-        rect.x -= 5
+        b1.x -= 5
 
     display.update()
     clock.tick(60)
