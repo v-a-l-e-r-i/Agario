@@ -1,10 +1,11 @@
 from pygame import *
+from random import randint
 
 # pip install pygame-ce
 
 init()
 window_size = 500, 400
-window = display.set_mode(window_size)
+win = display.set_mode(window_size)
 clock = time.Clock()
 
 class Ball:
@@ -15,17 +16,24 @@ class Ball:
         self.color = color
 
     def reset(self):
-        draw.circle(window, self.color, (self.x, self.y), self.radius)
+        draw.circle(win, self.color, (self.x, self.y), self.radius)
+
+class Food(Ball):
+    def __init__(self, x, y, r):
+        super().__init__(x, y, r, (randint(50, 255), randint(50, 255), randint(50, 255)))
+
 
 b1 = Ball(0, 0, 25, (255, 0, 0)) #(0, 0, 25, (255, 0, 0))
+f1 = Food(150, 150, randint(3, 15))
 
 while True:
-    window.fill((0,0,0))
+    win.fill((0,0,0))
     keys = key.get_pressed()
     for e in event.get():
         if e.type == QUIT:
             quit()
 
+    f1.reset()
     b1.reset()
 
     if keys[K_w]:
